@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand colors */
+  --color-primary: #0E7A3E;
+  --color-primary-dark: #0A5C2E;
+  --color-secondary: #5DBB2F;
+  --color-gold: #F4C542;
+  --color-gold-dark: #D9A91E;
+  --color-ink: #111827;
+  --color-ink-soft: #3B4452;
+  --color-paper: #FFFFFF;
+  --color-mist: #F6F8F4;
+  --color-mist-deep: #EEF2EA;
+  --color-line: #E2E8DD;
+  --color-night: #07150F;
+  --color-night-soft: #0E2419;
+  --color-night-line: #1C3A29;
+
+  /* Fonts */
+  --font-display: var(--font-archivo);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+
+  /* Easing */
+  --ease-loop: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Signature loop-flow animation, used for the connective process line and hero graphic */
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+.loop-flow {
+  stroke-dasharray: 6 10;
+  animation: flow-dash 6s linear infinite;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.drift {
+  animation: drift 5s var(--ease-loop) infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spin-slow 28s linear infinite;
+}
+
+@keyframes count-pulse {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Utility: balanced text wrap for headlines */
+.text-balance {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--color-gold-dark);
+  outline-offset: 3px;
+}
