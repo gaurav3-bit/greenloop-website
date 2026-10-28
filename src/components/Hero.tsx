@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Phone, MapPin } from "lucide-react";
+import { ArrowRight, Phone, MapPin, Check } from "lucide-react";
 import LoopGraphic from "./LoopGraphic";
 import { site } from "@/lib/content";
 
@@ -68,13 +68,14 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <motion.div variants={item} className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-ink-soft">
-            <span>Doorstep pickup across Indore district</span>
-            <span className="h-1 w-1 rounded-full bg-line" aria-hidden="true" />
-            <span>Supplied to a partnered biodiesel plant</span>
-            <span className="h-1 w-1 rounded-full bg-line" aria-hidden="true" />
-            <span>Free collection for businesses</span>
-          </motion.div>
+          <motion.ul variants={item} className="mt-12 flex flex-wrap gap-x-7 gap-y-3 text-sm text-ink-soft">
+            {["Doorstep pickup across Indore district", "Supplied to a partnered biodiesel plant", "Free collection for businesses"].map((point) => (
+              <li key={point} className="flex items-center gap-2">
+                <Check className="h-4 w-4 shrink-0 text-secondary" strokeWidth={2.5} />
+                {point}
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
 
         <motion.div
