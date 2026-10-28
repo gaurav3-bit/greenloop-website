@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logoMark from "../../public/logo-mark.png";
+import logoMark from "@/assets/logo-mark.png";
 
 type LogoProps = {
   variant?: "light" | "dark";
@@ -7,7 +7,7 @@ type LogoProps = {
 };
 
 /**
- * GreenLoop logo: the brand emblem (public/logo-mark.png) with the wordmark set in text,
+ * GreenLoop logo: the brand emblem (src/assets/logo-mark.png) with the wordmark set in text,
  * so it stays sharp at any size and can switch colors for light or dark backgrounds.
  */
 export default function Logo({ variant = "dark", className = "" }: LogoProps) {
