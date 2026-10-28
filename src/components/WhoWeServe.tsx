@@ -1,9 +1,20 @@
-import { Hotel, CookingPot, Store, Truck, Building2, type LucideIcon } from "lucide-react";
+import {
+  UtensilsCrossed,
+  Hotel,
+  CookingPot,
+  Factory,
+  Truck,
+  Store,
+  Building2,
+  type LucideIcon,
+} from "lucide-react";
 import Reveal from "./Reveal";
 import { segments } from "@/lib/content";
 
 const iconMap: Record<string, LucideIcon> = {
+  utensils: UtensilsCrossed,
   hotel: Hotel,
+  factory: Factory,
   "cooking-pot": CookingPot,
   store: Store,
   truck: Truck,
@@ -19,19 +30,19 @@ export default function WhoWeServe() {
             Who We Serve
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            Built for commercial kitchens of every scale
+            Built for food businesses of every scale
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-            From a single hotel kitchen to a multi-vendor food court, GreenLoop adapts collection
-            schedules and container sizes to how your business actually operates.
+            From a neighborhood dhaba to a namkeen factory, GreenLoop plans pickups around how your
+            business actually operates.
           </p>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {segments.map((segment, i) => {
             const Icon = iconMap[segment.icon];
             return (
-              <Reveal key={segment.id} delay={i * 0.08} className={i === 3 ? "sm:col-span-1" : ""}>
+              <Reveal key={segment.id} delay={i * 0.08}>
                 <div className="group h-full rounded-2xl border border-line bg-mist/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-secondary/40 hover:bg-white hover:shadow-[0_20px_40px_-20px_rgba(14,122,62,0.25)]">
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                     <Icon className="h-6 w-6" strokeWidth={1.75} />
@@ -43,7 +54,7 @@ export default function WhoWeServe() {
             );
           })}
 
-          <Reveal delay={5 * 0.08}>
+          <Reveal delay={segments.length * 0.08}>
             <div className="flex h-full flex-col justify-between rounded-2xl bg-primary p-7 text-white">
               <div>
                 <h3 className="font-display text-lg font-bold">Not sure which fits?</h3>

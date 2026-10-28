@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Phone, MapPin } from "lucide-react";
 import LoopGraphic from "./LoopGraphic";
+import { site } from "@/lib/content";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -44,9 +45,10 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p variants={item} className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-            GreenLoop Bio Resources helps hotels, cloud kitchens, caterers, food courts, and
-            institutional cafeterias safely dispose of used cooking oil through a reliable
-            collection network across Indore, and soon, throughout Madhya Pradesh.
+            GreenLoop Bio Resources offers doorstep collection of used cooking oil for hotels,
+            restaurants, cloud kitchens, caterers, food courts, and institutional cafeterias across
+            Indore district. Every litre goes to our partnered biodiesel plant, and soon, we&apos;ll be
+            collecting throughout Madhya Pradesh.
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-col gap-3.5 sm:flex-row">
@@ -58,7 +60,7 @@ export default function Hero() {
               <ArrowRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2} />
             </a>
             <a
-              href="tel:+917314002210"
+              href={site.phoneHref}
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink/10 bg-white px-7 py-4 text-base font-semibold text-ink transition-colors hover:border-primary/30 hover:text-primary"
             >
               <Phone className="h-4.5 w-4.5" strokeWidth={2} />
@@ -67,12 +69,11 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={item} className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-ink-soft">
-            <span className="font-mono font-semibold text-ink">500+</span>
-            <span className="-ml-6">business partners served</span>
+            <span>Doorstep pickup across Indore district</span>
             <span className="h-1 w-1 rounded-full bg-line" aria-hidden="true" />
-            <span>Authorized processing network</span>
+            <span>Supplied to a partnered biodiesel plant</span>
             <span className="h-1 w-1 rounded-full bg-line" aria-hidden="true" />
-            <span>Zero cost commercial collection</span>
+            <span>Free collection for businesses</span>
           </motion.div>
         </motion.div>
 

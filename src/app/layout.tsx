@@ -20,7 +20,7 @@ const plexMono = IBM_Plex_Mono({
   weight: ["500", "600", "700"],
 });
 
-   const siteUrl = "https://www.greenloopbioresources.com";
+const siteUrl = "https://www.greenloopbioresources.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

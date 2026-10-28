@@ -1,7 +1,7 @@
-import { Recycle, Droplets, Factory } from "lucide-react";
+import { Recycle, Droplets, Fuel, UtensilsCrossed } from "lucide-react";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
-import { impactStats } from "@/lib/content";
+import { impactStats, showImpactStats } from "@/lib/content";
 
 const storyPoints = [
   {
@@ -15,9 +15,14 @@ const storyPoints = [
     text: "Every litre collected is one that does not block municipal drains or contaminate local water bodies.",
   },
   {
-    icon: Factory,
-    title: "Feeding a cleaner grid",
-    text: "Processed oil becomes biodiesel and renewable feedstock, displacing demand on fossil-based energy sources.",
+    icon: Fuel,
+    title: "Cleaner fuel",
+    text: "Refined into biodiesel, your used oil helps reduce dependence on fossil fuels.",
+  },
+  {
+    icon: UtensilsCrossed,
+    title: "Kept out of the food chain",
+    text: "Oil that's collected for biodiesel can't be reheated and reused in food, which is a real risk with repeatedly used or informally resold oil.",
   },
 ];
 
@@ -35,30 +40,32 @@ export default function SustainabilityImpact() {
             Sustainability Impact
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-            A measurable step toward a cleaner energy ecosystem
+            Why used cooking oil shouldn&apos;t go to waste
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-white/70">
-            Every pickup is a small, trackable contribution to a much larger cycle, one that
-            turns commercial waste into a renewable resource at scale.
+            Poured down a drain or reused again and again, used oil causes real harm. Collected
+            properly, it becomes clean fuel.
           </p>
         </Reveal>
 
+        {showImpactStats && (
         <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-10 border-y border-night-line py-10 sm:gap-x-10 lg:grid-cols-4">
-          {impactStats.map((stat, i) => (
-            <Reveal key={stat.id} delay={i * 0.1}>
-              <div>
-                <p className="font-mono text-4xl font-bold text-gold sm:text-5xl">
-                  <Counter value={stat.value} suffix={stat.suffix} />
-                </p>
-                <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-white/60">
-                  {stat.label}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+            {impactStats.map((stat, i) => (
+              <Reveal key={stat.id} delay={i * 0.1}>
+                <div>
+                  <p className="font-mono text-4xl font-bold text-gold sm:text-5xl">
+                    <Counter value={stat.value} suffix={stat.suffix} />
+                  </p>
+                  <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-white/60">
+                    {stat.label}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        )}
 
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-3">
+        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {storyPoints.map((point, i) => {
             const Icon = point.icon;
             return (
@@ -73,9 +80,11 @@ export default function SustainabilityImpact() {
           })}
         </div>
 
-        <p className="mt-14 text-xs text-white/40">
-          Figures reflect cumulative collection activity and are updated periodically.
-        </p>
+        {showImpactStats && (
+          <p className="mt-14 text-xs text-white/40">
+            Figures reflect cumulative collection activity and are updated periodically.
+          </p>
+        )}
       </div>
     </section>
   );

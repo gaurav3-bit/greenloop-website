@@ -18,7 +18,7 @@ export default function WhyGreenLoop() {
             Why GreenLoop
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            Industrial discipline, environmental purpose
+            Simple, fair, and responsible
           </h2>
         </Reveal>
 

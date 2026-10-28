@@ -7,10 +7,10 @@ export const site = {
   tagline: "From Waste Today. To Energy Tomorrow. To A Legacy Forever.",
   description:
     "GreenLoop Bio Resources collects used cooking oil from hotels, cloud kitchens, food courts, caterers, and institutional cafeterias across Indore, and channels it into authorized renewable energy production.",
-  phone: "+91 731 400 2210",
-  phoneHref: "tel:+917314002210",
+  phone: "+91 92326 37874",
+  phoneHref: "tel:+919232637874",
   email: "pickups@greenloopbio.in",
-  whatsapp: "https://wa.me/917314002210",
+  whatsapp: "https://wa.me/919232637874",
   address: "AB Road Industrial Belt, Indore, Madhya Pradesh 452001",
   hours: "Mon – Sat, 9:00 AM – 7:00 PM IST",
 };
@@ -27,43 +27,51 @@ export type ServeSegment = {
   id: string;
   title: string;
   description: string;
-  icon: "hotel" | "cooking-pot" | "store" | "truck" | "building";
+  icon: "utensils" | "hotel" | "cooking-pot" | "factory" | "truck" | "store" | "building";
 };
 
 export const segments: ServeSegment[] = [
   {
+    id: "restaurants",
+    title: "Restaurants & Dhabas",
+    description:
+      "Regular pickups for everyday frying, whether you run a small dhaba or a busy multi-cuisine restaurant.",
+    icon: "utensils",
+  },
+  {
     id: "hotels",
     title: "Hotels",
-    description:
-      "Scheduled collection from kitchens and banquet operations, with documentation suited for sustainability and ESG reporting.",
+    description: "Scheduled collection from hotel kitchens and banquet operations.",
     icon: "hotel",
   },
   {
     id: "cloud-kitchens",
     title: "Cloud Kitchens",
-    description:
-      "Flexible pickup windows built around high-frequency, multi-brand kitchen operations and tight turnaround times.",
+    description: "Pickup times planned around busy, high-frequency kitchen operations.",
     icon: "cooking-pot",
   },
   {
-    id: "food-courts",
-    title: "Food Courts",
-    description:
-      "Centralized collection across multiple vendors in a single facility, coordinated through one point of contact.",
-    icon: "store",
+    id: "namkeen-sweets",
+    title: "Namkeen & Sweet Manufacturers",
+    description: "Collection for bulk frying units that produce large volumes of used oil.",
+    icon: "factory",
   },
   {
     id: "catering",
     title: "Catering Companies",
-    description:
-      "On-demand pickups aligned to event cycles and banquet schedules, including large-volume single collections.",
+    description: "Pickups timed around your events, including large one-time collections.",
     icon: "truck",
+  },
+  {
+    id: "food-courts",
+    title: "Food Courts",
+    description: "Collection from multiple vendors in one location, arranged through a single contact.",
+    icon: "store",
   },
   {
     id: "institutional",
     title: "Institutional Cafeterias",
-    description:
-      "Reliable recurring service for corporate campuses, hospitals, and educational institutions with high daily output.",
+    description: "Recurring pickups for corporate campuses, hospitals, colleges, and schools.",
     icon: "building",
   },
 ];
@@ -77,32 +85,31 @@ export type ProcessStep = {
 
 export const processSteps: ProcessStep[] = [
   {
-    id: "generated",
+    id: "request",
     index: "01",
-    title: "Used Cooking Oil Generated",
+    title: "Request a Pickup",
     description:
-      "Your kitchen produces used cooking oil through everyday frying and cooking operations, the starting point of the loop.",
+      "Call, WhatsApp, or fill in the form below. We'll confirm a time that suits your kitchen.",
   },
   {
-    id: "schedule",
+    id: "collect",
     index: "02",
-    title: "Schedule Pickup",
+    title: "We Collect",
     description:
-      "Submit a pickup request online or by phone. Our team confirms a collection window that fits your kitchen's schedule.",
+      "Our team arrives at the agreed time and transfers your used oil into sealed containers.",
   },
   {
-    id: "collection",
+    id: "weigh-pay",
     index: "03",
-    title: "Collection & Safe Handling",
-    description:
-      "A trained collection crew arrives with sealed, leak-proof containers and handles transfer without disrupting service.",
+    title: "Weighed & Paid",
+    description: "The oil is weighed on the spot, and you're paid at the agreed rate.",
   },
   {
-    id: "conversion",
+    id: "biodiesel",
     index: "04",
-    title: "Conversion Into Renewable Energy",
+    title: "Turned Into Biodiesel",
     description:
-      "Oil is supplied to authorized processing facilities, where it is converted into biodiesel and renewable energy feedstock.",
+      "We deliver the oil to our partner biodiesel plant, where it's refined into renewable fuel.",
   },
 ];
 
@@ -115,31 +122,30 @@ export type TrustPoint = {
 
 export const trustPoints: TrustPoint[] = [
   {
-    id: "reliable",
-    title: "Reliable Collection",
+    id: "fits-your-day",
+    title: "Pickup That Fits Your Day",
     description:
-      "Fixed pickup schedules and route planning mean your kitchen is never left storing oil longer than necessary.",
+      "We come at a time agreed with you, so collection doesn't disrupt your kitchen.",
     icon: "shield-check",
   },
   {
-    id: "professional",
-    title: "Professional Service",
-    description:
-      "Uniformed crews, sealed containers, and digital pickup records bring industrial-grade discipline to every collection.",
+    id: "fair",
+    title: "Fair & Transparent",
+    description: "Your oil is weighed in front of you and paid for at the agreed rate.",
     icon: "badge-check",
   },
   {
-    id: "responsible",
-    title: "Environmental Responsibility",
+    id: "destination",
+    title: "The Right Destination",
     description:
-      "Every litre is routed to authorized processing facilities, keeping used oil out of drains, landfills, and the food chain.",
+      "Every litre goes to our partner biodiesel plant, keeping used oil out of drains and out of the food chain.",
     icon: "leaf",
   },
   {
-    id: "growing",
-    title: "Growing Across Madhya Pradesh",
+    id: "local",
+    title: "Local & Growing",
     description:
-      "Live in Indore today, with collection routes expanding into neighboring districts across the state.",
+      "An Indore-based team serving the whole district, with plans to expand across Madhya Pradesh.",
     icon: "map",
   },
 ];
@@ -151,6 +157,9 @@ export type ImpactStat = {
   label: string;
   prefix?: string;
 };
+
+// Set to true once real figures are entered below to show the numbers row.
+export const showImpactStats = false;
 
 export const impactStats: ImpactStat[] = [
   { id: "liters", value: 10000, suffix: "+", label: "Litres Processed" },
@@ -173,7 +182,7 @@ export const serviceAreaPhases: ServiceAreaPhase[] = [
     phase: "Phase 1",
     title: "Indore",
     status: "Live",
-    description: "Full collection coverage across hotels, cloud kitchens, food courts, and institutions.",
+    description: "Collection across the whole Indore district, for every type of food business.",
   },
   {
     id: "phase-2",
@@ -192,10 +201,12 @@ export const serviceAreaPhases: ServiceAreaPhase[] = [
 ];
 
 export const businessTypes = [
+  "Restaurant / Dhaba",
   "Hotel",
   "Cloud Kitchen",
-  "Food Court",
+  "Namkeen / Sweet Manufacturer",
   "Catering Company",
+  "Food Court",
   "Institutional Cafeteria",
   "Other",
 ];

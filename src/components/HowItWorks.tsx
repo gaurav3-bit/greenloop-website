@@ -13,8 +13,8 @@ export default function HowItWorks() {
             One continuous loop, four simple steps
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-            From your fryer to a renewable energy facility, every collection follows the same
-            disciplined process, tracked end to end.
+            From your fryer to our partner biodiesel plant, every collection follows the same simple
+            process.
           </p>
         </Reveal>
 
