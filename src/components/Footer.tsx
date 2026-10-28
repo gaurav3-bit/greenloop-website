@@ -61,16 +61,20 @@ export default function Footer() {
                   {site.phone}
                 </a>
               </li>
-              <li className="flex items-start gap-2.5">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={1.75} />
-                <a href={`mailto:${site.email}`} className="hover:text-white">
-                  {site.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={1.75} />
-                <span>{site.address}</span>
-              </li>
+              {site.email && (
+                <li className="flex items-start gap-2.5">
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={1.75} />
+                  <a href={`mailto:${site.email}`} className="hover:text-white">
+                    {site.email}
+                  </a>
+                </li>
+              )}
+              {site.address && (
+                <li className="flex items-start gap-2.5">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={1.75} />
+                  <span>{site.address}</span>
+                </li>
+              )}
               <li className="flex items-start gap-2.5">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={1.75} />
                 <span>{site.hours}</span>
@@ -80,8 +84,11 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-night-line pt-8 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} GreenLoop Bio Resources. All rights reserved.</p>
-          <p>Authorized commercial collection partner across Indore, Madhya Pradesh.</p>
+          <div className="space-y-1">
+            <p>© {year} GreenLoop Bio Resources. All rights reserved.</p>
+            {site.gstin && <p>GSTIN: {site.gstin}</p>}
+          </div>
+          <p>Used cooking oil collection across Indore district, Madhya Pradesh.</p>
         </div>
       </div>
     </footer>

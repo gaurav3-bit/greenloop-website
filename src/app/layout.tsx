@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { site } from "@/lib/content";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | GreenLoop Bio Resources",
   },
   description:
-    "GreenLoop Bio Resources collects used cooking oil from hotels, cloud kitchens, food courts, caterers, and institutional cafeterias across Indore, supplying authorized facilities for renewable energy production. Schedule a free pickup.",
+    "GreenLoop Bio Resources collects used cooking oil from restaurants, hotels, cloud kitchens, namkeen and sweet manufacturers, caterers, and food courts across Indore district, and supplies it to a partner biodiesel plant. Request a free pickup.",
   keywords: [
     "used cooking oil collection Indore",
     "UCO collection Madhya Pradesh",
@@ -45,13 +46,13 @@ export const metadata: Metadata = {
     siteName: "GreenLoop Bio Resources",
     title: "GreenLoop Bio Resources | Used Cooking Oil Collection, Indore",
     description:
-      "Reliable used cooking oil collection for hotels, cloud kitchens, caterers, and institutions across Indore and Madhya Pradesh.",
+      "Used cooking oil collection for restaurants, hotels, cloud kitchens, and food businesses across Indore district.",
   },
   twitter: {
     card: "summary_large_image",
     title: "GreenLoop Bio Resources | Used Cooking Oil Collection, Indore",
     description:
-      "Reliable used cooking oil collection for hotels, cloud kitchens, caterers, and institutions across Indore and Madhya Pradesh.",
+      "Used cooking oil collection for restaurants, hotels, cloud kitchens, and food businesses across Indore district.",
   },
   robots: { index: true, follow: true },
 };
@@ -63,23 +64,21 @@ export const viewport = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "GreenLoop Bio Resources",
-  description:
-    "Used cooking oil collection service for hotels, cloud kitchens, food courts, caterers, and institutional cafeterias, supplying authorized facilities for renewable energy production.",
+  name: site.name,
+  description: site.description,
   url: siteUrl,
-  telephone: "+91-731-400-2210",
-  email: "pickups@greenloopbio.in",
+  telephone: site.phone,
+  ...(site.email ? { email: site.email } : {}),
   address: {
     "@type": "PostalAddress",
-    streetAddress: "AB Road Industrial Belt",
+    ...(site.address ? { streetAddress: site.address } : {}),
     addressLocality: "Indore",
     addressRegion: "Madhya Pradesh",
-    postalCode: "452001",
     addressCountry: "IN",
   },
   areaServed: {
-    "@type": "State",
-    name: "Madhya Pradesh",
+    "@type": "AdministrativeArea",
+    name: "Indore district, Madhya Pradesh",
   },
   openingHours: "Mo-Sa 09:00-19:00",
 };

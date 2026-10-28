@@ -6,12 +6,14 @@ export const site = {
   shortName: "GreenLoop",
   tagline: "From Waste Today. To Energy Tomorrow. To A Legacy Forever.",
   description:
-    "GreenLoop Bio Resources collects used cooking oil from hotels, cloud kitchens, food courts, caterers, and institutional cafeterias across Indore, and channels it into authorized renewable energy production.",
+    "GreenLoop Bio Resources collects used cooking oil from restaurants, hotels, cloud kitchens, namkeen and sweet manufacturers, caterers, food courts, and institutional cafeterias across Indore district, and supplies it to a partner biodiesel plant.",
   phone: "+91 92326 37874",
   phoneHref: "tel:+919232637874",
-  email: "pickups@greenloopbio.in",
+  // Leave email or address as "" to hide it from the site until the real one is ready.
+  email: "",
   whatsapp: "https://wa.me/919232637874",
-  address: "AB Road Industrial Belt, Indore, Madhya Pradesh 452001",
+  address: "",
+  gstin: "23ABFFG0131Q1ZI",
   hours: "Mon – Sat, 9:00 AM – 7:00 PM IST",
 };
 

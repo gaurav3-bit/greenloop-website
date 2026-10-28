@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Clock, Lock, Phone } from "lucide-react";
+import { CheckCircle2, Clock, Lock, Phone, MessageCircle } from "lucide-react";
 import Reveal from "./Reveal";
 import { businessTypes, quantityRanges, site } from "@/lib/content";
 
-type Status = "idle" | "submitting" | "success";
+type Status = "idle" | "success";
 
 const inputClasses =
   "w-full rounded-xl border border-line bg-white px-4 py-3 text-[0.95rem] text-ink placeholder:text-ink-soft/50 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15";
@@ -14,13 +14,36 @@ const labelClasses = "mb-1.5 block text-sm font-semibold text-ink";
 
 export default function PickupForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [waLink, setWaLink] = useState(site.whatsapp);
 
-  // NOTE: this demo submits to no backend. Wire onSubmit to an API route,
-  // form service, or CRM webhook to receive real pickup requests.
+  // Builds a WhatsApp message from the form and opens it addressed to site.whatsapp.
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
-    window.setTimeout(() => setStatus("success"), 900);
+    const data = new FormData(e.currentTarget);
+    const get = (key: string) => String(data.get(key) ?? "").trim();
+
+    const lines = [
+      "*New Pickup Request*",
+      "",
+      `Business: ${get("businessName")}`,
+      `Contact: ${get("contactPerson")}`,
+      `Phone: ${get("phone")}`,
+      get("email") ? `Email: ${get("email")}` : null,
+      `Type: ${get("businessType")}`,
+      `Quantity: ${get("quantity")}`,
+      `Location: ${get("location")}`,
+      get("message") ? `Message: ${get("message")}` : null,
+    ];
+
+    const text = lines.filter((line) => line !== null).join("\n");
+    const link = `${site.whatsapp}?text=${encodeURIComponent(text)}`;
+    setWaLink(link);
+
+    // Note: passing "noopener" makes window.open return null, so detach the opener manually.
+    const opened = window.open(link, "_blank");
+    if (opened) opened.opener = null;
+    else window.location.href = link;
+    setStatus("success");
   }
 
   return (
@@ -35,23 +58,23 @@ export default function PickupForm() {
               Schedule your first collection
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-              Share a few details about your kitchen and our team will confirm a pickup window
-              within one business day.
+              Share a few details about your business. When you submit, WhatsApp opens with your
+              request ready to send to our team.
             </p>
 
             <ul className="mt-10 space-y-5">
               <li className="flex items-start gap-3.5">
                 <Clock className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
                 <span className="text-[0.95rem] text-ink-soft">
-                  <strong className="text-ink">Fast confirmation:</strong> most requests are
-                  scheduled within 24 hours.
+                  <strong className="text-ink">Quick reply:</strong> we&apos;ll respond on WhatsApp
+                  to confirm a pickup time.
                 </span>
               </li>
               <li className="flex items-start gap-3.5">
                 <Lock className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
                 <span className="text-[0.95rem] text-ink-soft">
-                  <strong className="text-ink">No cost to your business:</strong> commercial
-                  collection carries no pickup fee.
+                  <strong className="text-ink">Free pickup:</strong> we don&apos;t charge any
+                  collection fee.
                 </span>
               </li>
               <li className="flex items-start gap-3.5">
@@ -73,12 +96,21 @@ export default function PickupForm() {
                   <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <CheckCircle2 className="h-8 w-8" strokeWidth={1.75} />
                   </span>
-                  <h3 className="mt-5 font-display text-xl font-bold text-ink">Request received</h3>
+                  <h3 className="mt-5 font-display text-xl font-bold text-ink">Almost done!</h3>
                   <p className="mt-2 max-w-sm text-[0.95rem] leading-relaxed text-ink-soft">
-                    Thank you. A GreenLoop coordinator will call you within one business day to
-                    confirm your pickup window.
+                    WhatsApp has opened with your request. Just tap <strong>Send</strong> so it
+                    reaches our team, and we&apos;ll reply to confirm a pickup time.
                   </p>
-                  <a href={site.phoneHref} className="mt-6 text-sm font-semibold text-primary">
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+                  >
+                    <MessageCircle className="h-4 w-4" strokeWidth={2} />
+                    WhatsApp didn&apos;t open? Tap here
+                  </a>
+                  <a href={site.phoneHref} className="mt-4 text-sm font-semibold text-primary">
                     Or call us now: {site.phone}
                   </a>
                 </div>
@@ -108,9 +140,9 @@ export default function PickupForm() {
                     </div>
                     <div>
                       <label htmlFor="email" className={labelClasses}>
-                        Email
+                        Email <span className="font-normal text-ink-soft">(optional)</span>
                       </label>
-                      <input id="email" name="email" type="email" required className={inputClasses} placeholder="you@business.com" />
+                      <input id="email" name="email" type="email" className={inputClasses} placeholder="you@business.com" />
                     </div>
                   </div>
 
@@ -163,14 +195,14 @@ export default function PickupForm() {
 
                   <button
                     type="submit"
-                    disabled={status === "submitting"}
-                    className="w-full rounded-xl bg-primary px-6 py-4 text-base font-semibold text-white shadow-[0_12px_30px_-10px_rgba(14,122,62,0.5)] transition-all hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-70"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-base font-semibold text-white shadow-[0_12px_30px_-10px_rgba(14,122,62,0.5)] transition-all hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    {status === "submitting" ? "Submitting…" : "Schedule Pickup"}
+                    <MessageCircle className="h-5 w-5" strokeWidth={2} />
+                    Send Request on WhatsApp
                   </button>
 
                   <p className="text-center text-xs text-ink-soft">
-                    By submitting, you agree to be contacted by GreenLoop regarding this request.
+                    This opens WhatsApp with your details filled in. Just tap send.
                   </p>
                 </form>
               )}

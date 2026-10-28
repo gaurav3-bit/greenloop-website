@@ -122,6 +122,11 @@ body {
 .leaflet-tooltip.gl-map-label::before {
   display: none;
 }
+.leaflet-tooltip.gl-map-label-3 {
+  color: var(--color-ink-soft);
+  font-weight: 500;
+  opacity: 0.85;
+}
 .leaflet-tooltip.gl-map-label-1 {
   background: var(--color-primary);
   border-color: var(--color-primary);
